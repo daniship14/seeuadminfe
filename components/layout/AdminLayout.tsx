@@ -20,6 +20,24 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setSidebarOpen(!mobile);
+    };
+
+    check();
+
+    window.addEventListener('resize', check);
+
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+
   const [profileOpen, setProfileOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -50,7 +68,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: 'var(--bg)' }}>
       {/* Sidebar */}
-      <aside style={{
+    <aside
+      style={{
+        position: isMobile ? 'fixed' : 'relative',
+        left: 0,
+        top: 0,
+        height: isMobile ? '100vh' : '100%',
         width: sidebarOpen ? '270px' : '0',
         minWidth: sidebarOpen ? '270px' : '0',
         background: 'var(--surface)',
@@ -60,7 +83,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         overflow: 'hidden',
         transition: 'width 0.25s, min-width 0.25s',
         zIndex: 40,
-      }}>
+      }}
+    >
         {/* Logo */}
         <div style={{ padding: '20px 16px', borderBottom: '1px solid var(--border)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -90,6 +114,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             <Link
               key={href}
               href={href}
+              onClick={() => { if (isMobile) setSidebarOpen(false); }}
               className={`nav-link ${isActive ? 'active' : ''}`}
               style={{
                 marginBottom: '8px',
@@ -135,6 +160,19 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </button>
         </div>
       </aside>
+
+      {/* Mobile overlay backdrop */}
+      {isMobile && sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.5)',
+            zIndex: 39,
+          }}
+        />
+      )}
 
       {/* Main */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
@@ -279,7 +317,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         </header>
 
         {/* Page content */}
-        <main style={{ flex: 1, overflowY: 'auto', padding: '28px 32px' }}>
+        <main
+        style={{
+          flex: 1,
+          overflowY: 'auto',
+          padding: isMobile ? '16px' : '28px 32px',
+        }}
+      >
           {children}
         </main>
 
