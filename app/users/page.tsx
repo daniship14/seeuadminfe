@@ -162,7 +162,13 @@
             </div>
 
             {/* Filter row */}
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                  gap: '12px',
+                }}
+              >
 
               {/* Gender */}
               <div>
@@ -253,7 +259,7 @@
                     setPage(1);
                   }}
                   className="seeu-input"
-                  style={{ width: '240px' }}
+                  style={{ width: '100%' }}
                 >
                   {TYPE_OPTIONS.map(type => (
                     <option key={type.value} value={type.value}>
@@ -280,7 +286,7 @@
                     setPage(1);
                   }}
                   className="seeu-input"
-                  style={{ width: '240px' }}
+                  style={{ width: '100%' }}
                 >
                   {STATUS_OPTIONS.map(s => (
                     <option key={s.value} value={s.value}>
@@ -303,7 +309,7 @@
                 <input
                   type="date"
                   className="seeu-input"
-                  style={{ width: '240px' }}
+                  style={{ width: '100%' }}
                 />
               </div>
 
@@ -320,7 +326,7 @@
                 <input
                   type="date"
                   className="seeu-input"
-                  style={{ width: '240px' }}
+                  style={{ width: '100%' }}
                 />
               </div>
 

@@ -226,3 +226,30 @@ tbody tr:last-child td {
 
   border-radius: 14px;
 }
+
+
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 32px !important;
+    line-height: 1.2;
+  }
+
+  table {
+    min-width: 900px;
+  }
+
+  .seeu-card {
+    padding: 16px !important;
+  }
+
+  input,
+  select,
+  button {
+    min-height: 44px;
+  }
+
+  .recharts-responsive-container {
+    font-size: 12px;
+  }
+}

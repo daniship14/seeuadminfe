@@ -142,7 +142,18 @@ const fetchPlans = useCallback(async () => {
 
         {/* Tabs + Search */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
-          <div style={{ display: 'flex', gap: '4px', background: 'var(--surface)', borderRadius: '10px', padding: '4px' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '4px',
+              background: 'var(--surface)',
+              borderRadius: '10px',
+              padding: '4px',
+              width: 'fit-content',
+              minWidth: '320px',
+            }}
+          >
             {(['basic', 'chat', 'micro'] as TabType[]).map(tab => (
               <button key={tab} onClick={() => { setActiveTab(tab); setPage(1); }} style={tabStyle(tab) as React.CSSProperties}>
                 {tab === 'basic' ? 'Basic Plan' : tab === 'chat' ? 'Chat Plan' : 'Micro Plan'}
@@ -150,7 +161,15 @@ const fetchPlans = useCallback(async () => {
             ))}
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  flex: 1,
+                  justifyContent: 'flex-end',
+                  minWidth: '250px',
+                }}
+              >
             <div style={{ position: 'relative' }}>
               <Search size={14} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }} />
               <input
@@ -158,7 +177,7 @@ const fetchPlans = useCallback(async () => {
                 placeholder={t.searchPlan}
                 value={search}
                 onChange={e => { setSearch(e.target.value); setPage(1); }}
-                style={{ paddingLeft: '32px', width: '200px' }}
+                style={{ paddingLeft: '32px', width: '100%',}}
               />
             </div>
           </div>

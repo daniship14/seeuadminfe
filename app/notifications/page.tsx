@@ -117,6 +117,8 @@ export default function NotificationsPage() {
             justifyContent: 'space-between',
             alignItems: 'center',
             marginBottom: '20px',
+            flexWrap: 'wrap',
+            gap: '12px',
           }}
         >
           {/* LEFT FILTER TABS */}
@@ -289,6 +291,8 @@ export default function NotificationsPage() {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: '22px',
+                flexWrap: 'wrap',
+                gap: '12px',
               }}
             >
               <div
